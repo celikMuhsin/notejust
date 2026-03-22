@@ -1,0 +1,1285 @@
+/* Temel Sıfırlama ve Font Ayarları */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d0f;
+    color: #fafafa;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- Sol Kenar Çubuğu (Sidebar) --- */
+.sidebar {
+    width: 270px;
+    background-color: #161618;
+    border-right: 1px solid #232326;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.action-btn {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #0d0d0f;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #e4e4e6;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
+}
+
+.action-btn:active {
+    transform: translateY(0px);
+    background-color: #d1d1d3;
+    box-shadow: none;
+}
+
+.new-folder-btn {
+    background-color: #2e2e32;
+    color: #ffffff;
+}
+
+.new-folder-btn:hover {
+    background-color: #3e3e42;
+}
+
+.sidebar-title {
+    margin-top: 32px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #88888e;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-left: 4px;
+}
+
+/* Tree & Nested Notes */
+.notes-list {
+    flex: 1;
+    margin-top: 16px;
+    list-style: none;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 80px;
+}
+
+.tree-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.tree-item-content {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: #ceced2;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    user-select: none;
+    gap: 8px;
+    border: 2px solid transparent;
+}
+
+.tree-item-content:hover {
+    background-color: #232326;
+}
+
+.tree-item-content.active {
+    background-color: #2e2e32;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Sürükle Bırak Durum Sınıfları */
+.tree-item-content.drag-over-inside {
+    background-color: #3f3f46;
+    border: 2px dashed #a1a1aa;
+}
+
+.tree-item-content.drag-over-top {
+    border-top: 2px solid #6366f1;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.tree-item-content.drag-over-bottom {
+    border-bottom: 2px solid #6366f1;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.tree-item-icon {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+}
+
+.tree-item-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tree-children {
+    list-style: none;
+    padding-left: 12px;
+    margin-left: 14px;
+    border-left: 1px solid #3e3e42;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.tree-children.expanded {
+    display: flex;
+}
+
+/* --- Sağ Metin Editörü (Editor) --- */
+.editor {
+    flex: 1;
+    background-color: #0d0d0f;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 80px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.editor-header {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.note-title {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    outline: none;
+    line-height: 1.2;
+}
+
+.note-title::placeholder {
+    color: #3e3e42;
+}
+
+.note-date {
+    font-size: 0.85rem;
+    color: #636369;
+    font-weight: 500;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+/* contenteditable div kuralları */
+.note-content {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #ceced2;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    outline: none;
+    min-height: 50vh;
+}
+
+.note-content:empty::before {
+    content: attr(data-placeholder);
+    color: #3e3e42;
+    pointer-events: none;
+}
+
+/* Editör İçi Liste Stilleri (Sıfırlanan padding'i geri getirerek maddelerin sola yapışmasını engeller) */
+.note-content ul,
+.note-content ol {
+    padding-left: 2.5rem;
+    margin: 0.5rem 0;
+}
+
+.note-content li {
+    margin-bottom: 0.25rem;
+}
+
+/* Yüzen Araç Çubuğu (Floating Toolbar) Düzeni */
+.floating-toolbar {
+    position: fixed;
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 6px 4px 3px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    transform: translateY(4px);
+    z-index: 1000;
+}
+
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    justify-content: center;
+}
+
+/* YENİ EKLENTİLER: Sabit Tek Satır Modu (Docked Mode) */
+.floating-toolbar.docked {
+    flex-direction: row;
+}
+
+.floating-toolbar.docked .toolbar-row {
+    width: auto;
+}
+
+.floating-toolbar.docked .toolbar-divider-horizontal {
+    width: 1px !important;
+    height: 20px !important;
+    margin: 0 4px !important;
+}
+
+/* Tek satır modunda sıralamayı (Bold tarafı başa gelecek şekilde) değiştir */
+.floating-toolbar.docked>.toolbar-row:nth-child(1) {
+    order: 3;
+}
+
+.floating-toolbar.docked>.toolbar-divider-horizontal {
+    order: 2;
+}
+
+.floating-toolbar.docked>.toolbar-row:nth-child(3) {
+    order: 1;
+}
+
+.floating-toolbar.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.floating-toolbar button {
+    background: transparent;
+    border: none;
+    color: #eaeaea;
+    width: 28px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    padding-top: 1px;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.floating-toolbar button:hover {
+    background-color: #3f3f46;
+}
+
+/* YENİ EKLENTİLER: Toolbar Geliştirmeleri */
+.sub-text {
+    font-size: 0.75em;
+    position: relative;
+    top: 0.4em;
+    color: #0078D4;
+    line-height: 0;
+}
+
+.sup-text {
+    font-size: 0.75em;
+    position: relative;
+    top: -0.4em;
+    color: #0078D4;
+    line-height: 0;
+}
+
+.toolbar-divider {
+    width: 1px;
+    height: 20px;
+    background-color: #3f3f46;
+    margin: 0 4px;
+}
+
+/* Özel Renk Seçici ve Genel Menü Butonları */
+.color-picker-btn {
+    position: relative;
+    width: 28px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.color-picker-btn:hover {
+    background-color: #3f3f46;
+}
+
+.color-indicator {
+    font-weight: 900;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ========================================= */
+/* GENEL POPUP MENÜ GÖRÜNÜMÜ (Dropdowns)     */
+/* ========================================= */
+.popup-menu {
+    position: absolute;
+    top: 100%;
+    margin-top: 8px;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    transform: translateX(-50%);
+    transition: opacity 0.1s;
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+}
+
+.popup-menu.hidden {
+    display: none;
+}
+
+/* --- Metin (Heading) Stilleri --- */
+.style-item {
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.15s;
+    white-space: nowrap;
+    color: #ceced2;
+}
+
+.style-item:hover {
+    background-color: #3f3f46;
+    color: #fff;
+}
+
+/* --- Bullet Stilleri --- */
+.bullet-grid-word {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.bullet-swatch-word {
+    width: 34px;
+    height: 34px;
+    background: #18181b;
+    border: 1px solid #3e3e42;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eaeaea;
+    transition: all 0.1s;
+}
+
+/* --- YENİ EKLENTİ: Numbering Kitaplığı Stilleri --- */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.number-swatch {
+    width: auto;
+    height: 56px;
+    background: #18181b;
+    border: 1px solid #3e3e42;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.1s, border-color 0.1s;
+    padding: 4px;
+}
+
+.number-swatch:hover {
+    background: #3f3f46;
+    border-color: #fafafa;
+}
+
+/* Özel Numara (1), a) vb.) Stilleri */
+ol.custom-paren-decimal {
+    list-style-type: none;
+    counter-reset: custom-ol;
+}
+
+ol.custom-paren-decimal>li {
+    position: relative;
+}
+
+ol.custom-paren-decimal>li::before {
+    counter-increment: custom-ol;
+    content: counter(custom-ol) ") ";
+    position: absolute;
+    left: -2em;
+    width: 1.5em;
+    text-align: right;
+    color: inherit;
+}
+
+ol.custom-paren-alpha {
+    list-style-type: none;
+    counter-reset: custom-ol;
+}
+
+ol.custom-paren-alpha>li {
+    position: relative;
+}
+
+ol.custom-paren-alpha>li::before {
+    counter-increment: custom-ol;
+    content: counter(custom-ol, lower-alpha) ") ";
+    position: absolute;
+    left: -2em;
+    width: 1.5em;
+    text-align: right;
+    color: inherit;
+}
+
+.bullet-swatch-word:hover {
+    background-color: #27272a;
+    border-color: #0078D4;
+    box-shadow: 0 0 0 1px #0078D4;
+}
+
+.marker-blue li::marker {
+    color: #0078D4;
+}
+
+.marker-color li::marker {
+    color: #e11d48;
+}
+
+.marker-blue li::marker {
+    color: #0078D4;
+}
+
+.marker-color li::marker {
+    color: #e11d48;
+}
+
+
+.submenu-item {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    color: #a1a1aa;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 4px;
+    font-family: 'Inter', sans-serif;
+}
+
+.submenu-item:hover {
+    background-color: #3f3f46;
+    color: #fff;
+}
+
+/* --- Renk Stilleri --- */
+.color-swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.palette-divider {
+    height: 1px;
+    background-color: #3f3f46;
+    width: 100%;
+}
+
+.all-colors-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: #ceced2;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 0;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.2s, color 0.2s;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.all-colors-btn:hover {
+    background-color: #2e2e32;
+    color: #ffffff;
+}
+
+.all-colors-btn input[type="color"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #3e3e42;
+    transition: transform 0.1s, border-color 0.1s;
+}
+
+.color-swatch:hover {
+    border-color: #fafafa;
+    transform: scale(1.15);
+}
+
+/* ========================================= */
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    background: #18181b;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 24px;
+    margin-left: 2px;
+}
+
+.font-size-control button {
+    width: 20px;
+    height: 24px;
+    border-radius: 0;
+    background: #27272a;
+}
+
+.font-size-control button:hover {
+    background: #3f3f46;
+}
+
+.font-size-control input {
+    width: 28px;
+    height: 24px;
+    background: #27272a;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.font-size-control input::-webkit-outer-spin-button,
+.font-size-control input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* Biçimlendirme ile div içindeki etiketlerin algılanması */
+.note-content b {
+    font-weight: bold;
+}
+
+.note-content i {
+    font-style: italic;
+}
+
+.note-content u {
+    text-decoration: underline;
+}
+
+.note-content pre {
+    background: #232326;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 8px 0;
+}
+
+.note-content blockquote {
+    border-left: 4px solid #6366f1;
+    padding-left: 12px;
+    margin: 8px 0;
+    color: #a1a1aa;
+    font-style: italic;
+    background: #18181b;
+    padding: 8px 12px;
+    border-radius: 0 8px 8px 0;
+}
+
+.note-content ul {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.note-content li {
+    margin-bottom: 4px;
+}
+
+.note-content h1 {
+    font-size: 2rem;
+    border-bottom: 1px solid #2e2e32;
+    padding-bottom: 4px;
+    margin: 16px 0 8px 0;
+}
+
+.note-content h2 {
+    font-size: 1.5rem;
+    margin: 12px 0 6px 0;
+}
+
+.note-content h3 {
+    font-size: 1.17rem;
+    margin: 10px 0 4px 0;
+}
+
+.note-content p {
+    margin: 4px 0;
+    min-height: 1.5em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2e2e32;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4a4a50;
+}
+
+.active-painter {
+    background-color: #27272a !important;
+    box-shadow: 0 0 0 1px #0078D4;
+}
+
+.editor-painting {
+    cursor: copy !important;
+}
+
+/* Ekle Menüsü Grid Yapısı */
+.insert-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+    padding-top: 4px;
+}
+
+.insert-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+    position: relative;
+}
+
+.insert-item:hover {
+    background: #3f3f46;
+}
+
+.insert-icon-box {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    margin-bottom: 2px;
+}
+
+.insert-item span {
+    font-size: 0.75rem;
+    color: #eaeaea;
+}
+
+.dropdown-arrow-small {
+    font-size: 0.6rem !important;
+    color: #71717a !important;
+    margin-top: -2px;
+}
+
+/* Editör İçindeki Resimler */
+.note-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 12px 0;
+    display: block;
+    /* Varsayılan blok */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, margin 0.2s ease;
+    user-select: auto !important;
+    -webkit-user-drag: element !important;
+}
+
+/* Metin Kaydırma Sınıfları */
+.img-wrap-inline {
+    display: inline-block !important;
+    float: none !important;
+    margin: 4px 8px !important;
+    vertical-align: middle;
+}
+
+.img-wrap-center {
+    display: block !important;
+    float: none !important;
+    margin: 12px auto !important;
+}
+
+.img-wrap-left {
+    display: block !important;
+    float: left !important;
+    margin: 8px 20px 12px 0 !important;
+    max-width: 50% !important;
+}
+
+.img-wrap-right {
+    display: block !important;
+    float: right !important;
+    margin: 8px 0 12px 20px !important;
+    max-width: 50% !important;
+}
+
+.img-free {
+    position: absolute !important;
+    z-index: 100 !important;
+    margin: 0 !important;
+    float: none !important;
+    cursor: move !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.note-content {
+    position: relative !important;
+}
+
+.note-content img:hover {
+    transform: scale(1.005);
+}
+
+.note-content img.resize-active {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.image-resizer-handle {
+    width: 10px;
+    height: 10px;
+    background: #3b82f6;
+    border: 1.5px solid #ffffff;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 1000;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.image-resizer-handle.nw {
+    cursor: nw-resize;
+}
+
+.image-resizer-handle.ne {
+    cursor: ne-resize;
+}
+
+.image-resizer-handle.sw {
+    cursor: sw-resize;
+}
+
+.image-resizer-handle.se {
+    cursor: se-resize;
+}
+
+/* Resim İşlem Araç Çubuğu (Dışarıda, Sağda) */
+.image-action-toolbar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1001;
+    background: #ffffff;
+    padding: 2px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
+}
+
+.image-action-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    background: transparent;
+    transition: background-color 0.2s;
+    color: #475569;
+}
+
+.image-action-btn:hover {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.image-action-btn.active {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+/* Kırpma Tutamaçları (Kalın Siyah Çubuklar) */
+.crop-handle {
+    position: absolute;
+    background: #000000;
+    z-index: 1002;
+}
+
+.crop-handle.top,
+.crop-handle.bottom {
+    height: 4px;
+    width: 30px;
+    cursor: n-resize;
+}
+
+.crop-handle.left,
+.crop-handle.right {
+    width: 4px;
+    height: 30px;
+    cursor: e-resize;
+}
+
+.crop-handle.nw,
+.crop-handle.ne,
+.crop-handle.sw,
+.crop-handle.se {
+    width: 12px;
+    height: 12px;
+    border: 3px solid #000;
+    background: transparent;
+}
+
+.crop-handle.nw {
+    border-right: none;
+    border-bottom: none;
+    cursor: nw-resize;
+}
+
+.crop-handle.ne {
+    border-left: none;
+    border-bottom: none;
+    cursor: ne-resize;
+}
+
+.crop-handle.sw {
+    border-right: none;
+    border-top: none;
+    cursor: sw-resize;
+}
+
+.crop-handle.se {
+    border-left: none;
+    border-top: none;
+    cursor: se-resize;
+}
+
+/* Düzen Seçenekleri Butonu */
+.image-layout-btn {
+    width: 28px;
+    height: 28px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s;
+}
+
+.image-layout-btn:hover {
+    background: #f1f5f9;
+}
+
+/* Düzen Menüsü (Mini Popup) */
+.layout-menu {
+    position: absolute;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 8px;
+    z-index: 1001;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 160px;
+}
+
+.layout-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #eaeaea;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.layout-option:hover {
+    background: #3f3f46;
+}
+
+.layout-option.active {
+    background: #27272a;
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.layout-option svg {
+    width: 20px;
+    height: 15px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+}
+
+/* ========================================= */
+/* MOBİL UYUM (Responsive & PWA)             */
+/* ========================================= */
+@media (max-width: 768px) {
+
+    /* Hamburger Menü Butonu */
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: #ceced2;
+        cursor: pointer;
+        padding: 4px;
+        margin-right: 8px;
+    }
+
+    /* Sol Kenar Çubuğu (Sidebar) Gizleme ve Kaydırma Animasyonu */
+    .sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        height: 100%;
+        width: 220px;
+        padding: 20px 12px;
+        z-index: 2000;
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Üst butonlar (Yeni Not / Klasör) mobilde daha küçük */
+    .action-btn {
+        padding: 8px;
+        font-size: 0.85rem;
+        gap: 4px;
+    }
+
+    /* Arka Plan Karartması (Overlay) */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Editör Başlık ve Padding Ayarı */
+    .editor {
+        padding: 20px 16px;
+    }
+
+    .note-title {
+        font-size: 1.8rem;
+    }
+
+    .note-date {
+        font-size: 0.75rem;
+    }
+
+    /* Yüzen Araç Çubuğunu Sabit (Dokunmatik) Hale Getirme */
+    .floating-toolbar {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        padding: 8px 4px !important;
+        background-color: #18181b !important;
+        transform: none !important;
+        /* Y animasyonları iptal */
+        flex-direction: row !important;
+        /* Tek satır */
+        overflow-x: auto !important;
+        /* Sağ sola kaydırma */
+        white-space: nowrap !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .floating-toolbar::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .floating-toolbar::-webkit-scrollbar-thumb {
+        background: #3e3e42;
+        border-radius: 4px;
+    }
+
+    /* Docked modunu eziyoruz */
+    .floating-toolbar.docked {
+        position: fixed !important;
+        bottom: 0 !important;
+        top: auto !important;
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .toolbar-row {
+        width: auto !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        padding-bottom: 2px;
+        /* Scrollbar için yer */
+    }
+
+    /* Mobilde yatay çizgileri dikey yap veya gizle, çünkü flex-direction row */
+    .toolbar-divider-horizontal {
+        width: 1px !important;
+        height: 24px !important;
+        margin: 0 4px !important;
+    }
+
+    /* Butonları dokunmatik için biraz büyütme */
+    .floating-toolbar button,
+    .color-picker-btn {
+        min-width: 36px !important;
+        height: 36px !important;
+    }
+
+    .font-size-control {
+        height: 30px !important;
+    }
+
+    .font-size-control button,
+    .font-size-control input {
+        height: 30px !important;
+    }
+
+    /* Popup Menülerin Yukarı Açılması */
+    .popup-menu {
+        top: auto !important;
+        bottom: 100% !important;
+        /* Toolbarın üstünde açıl */
+        margin-bottom: 8px;
+        transform: translateX(0) !important;
+        left: 4px !important;
+        /* Sola yapışık */
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    /* Resimlerin Mobilde Taşmasını ve Kaybolmasını Önleme (Stacking) */
+    .note-content .img-free:not(.is-dragging):not(.was-dragged),
+    .note-content .img-wrap-left,
+    .note-content .img-wrap-right,
+    .note-content .img-wrap-center {
+        position: static !important;
+        float: none !important;
+        display: block !important;
+        max-width: 100% !important;
+        margin: 16px auto !important;
+        transform: none !important;
+        left: auto !important;
+        top: auto !important;
+    }
+
+    /* Sürükleme anında tekrar absolute olmalı */
+    .note-content .img-free.is-dragging {
+        position: absolute !important;
+        z-index: 9999 !important;
+        opacity: 0.8;
+    }
+
+    /* Sürükleme bittikten sonra "kilitlenip" serbest moda geçmesi (istediği yere bırakabilme hakkı) */
+    .note-content .img-free.was-dragged {
+        position: absolute !important;
+        z-index: 100 !important;
+        transform: none !important;
+        margin: 0 !important;
+    }
+}
+
+/* Masaüstünde gizle */
+@media (min-width: 769px) {
+    .mobile-menu-btn {
+        display: none !important;
+    }
+
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* JS'in atadığı inline left yönergelerini ezip mobilde ortalama garantisi veren düzeltme. 
+       Ancak SÜRÜKLEME anında veya SÜRÜKLENDİKTEN SONRA (serbest kilit) JS koordinatlarının çalışabilmesi için :not() pseudo sınıfları ile hariç tutuldu. */
+    .note-content .img-free:not(.is-dragging):not(.was-dragged) {
+        position: static !important;
+        display: block !important;
+        float: none !important;
+        max-width: 90vw !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        margin: 16px auto !important;
+        transform: none !important;
+    }
+
+    /* Eğer mobilde parmakla sürüklemeye başlarsak, sadece o an absolute ve görünür yap, inline left/top devrede kalır */
+    .note-content .img-free.is-dragging {
+        position: absolute !important;
+        z-index: 9999 !important;
+        opacity: 0.8 !important;
+        max-width: 90vw !important;
+        left: var(--mobile-left, auto) !important;
+        top: var(--mobile-top, auto) !important;
+    }
+
+    /* Sürükleme bittikten sonra da absolute olarak yeni koordinatlarında kilitli kalabilmeli */
+    .note-content .img-free.was-dragged {
+        position: absolute !important;
+        z-index: 100 !important;
+        max-width: 90vw !important;
+        margin: 0 !important;
+        transform: none !important;
+        left: var(--mobile-left, auto) !important;
+        top: var(--mobile-top, auto) !important;
+    }
+}
