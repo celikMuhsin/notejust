@@ -1125,12 +1125,13 @@ ol.custom-paren-alpha>li::before {
         bottom: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        z-index: 9999 !important;
+        z-index: 999999 !important; /* Her şeyin üstünde olsun */
         top: auto !important;
         border-radius: 0 !important;
         border: none !important;
         padding: 8px 12px !important;
-        background-color: #18181b !important;
+        background-color: #fff !important; /* Arka planı transparan olmasın */
+        color: #000 !important; /* Beyaz arka planda metinler siyah olsun */
         transform: none !important;
         flex-direction: row !important;
         overflow-x: auto !important;
@@ -1138,7 +1139,7 @@ ol.custom-paren-alpha>li::before {
         white-space: nowrap !important;
         flex-wrap: nowrap !important;
         justify-content: flex-start !important;
-        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5) !important;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4) !important;
     }
 
     .floating-toolbar::-webkit-scrollbar {
