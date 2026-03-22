@@ -804,6 +804,22 @@ window.hideKeyboard = function() {
     }
 };
 
+// Visual Viewport API ile Klavye Takibi (Toolbar'ı klavye üzerine yapıştırır)
+if (window.visualViewport) {
+    const handleViewportChange = () => {
+        if (window.innerWidth <= 768) {
+            const viewport = window.visualViewport;
+            const offset = window.innerHeight - viewport.height;
+            // Klavye açıkken (offset > 0) toolbar'ı yukarı it, aksi halde 0 yap
+            document.documentElement.style.setProperty('--keyboard-offset', (offset > 0 ? offset : 0) + 'px');
+        } else {
+            document.documentElement.style.setProperty('--keyboard-offset', '0px');
+        }
+    };
+    window.visualViewport.addEventListener('resize', handleViewportChange);
+    window.visualViewport.addEventListener('scroll', handleViewportChange);
+}
+
 // ---- Dışa Aktarımlar ----
 export {
     autoSave,
