@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="favicon.png">
+    <!-- Sosyal Medya ve Mobil Önizleme -->
+    <meta property="og:image" content="logo.png">
+    <meta property="og:title" content="NoteJust">
+    <meta property="og:description" content="Modern ve Hızlı Not Alma Uygulaması">
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#18181b">
@@ -262,6 +266,13 @@
                         <rect x="6.5" y="8" width="11" height="3" rx="0.5" fill="#d4d4d8" stroke="#71717a"
                             stroke-width="1.5" />
                     </g>
+                </svg>
+            </button>
+
+            <!-- Klavye Kapatma Butonu (Mobil İçin Kritik) -->
+            <button onmousedown="event.preventDefault(); hideKeyboard()" title="Klavyeyi Gizle" class="color-picker-btn hide-keyboard-btn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
                 </svg>
             </button>
         </div>

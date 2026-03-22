@@ -1,4 +1,4 @@
-const CACHE_NAME = 'notapp-cache-v1';
+const CACHE_NAME = 'notejust-cache-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -8,7 +8,9 @@ const ASSETS_TO_CACHE = [
   './ui.js',
   './editor.js',
   './image-handler.js',
-  './manifest.json'
+  './manifest.json',
+  './favicon.png',
+  './logo.png'
 ];
 
 // Kurulum (Install) - Kaynakları önbelleğe al

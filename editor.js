@@ -797,6 +797,13 @@ window.changeFontSize = function(delta) {
     updateToolbarPosition();
 };
 
+// Klavye Gizleme Fonksiyonu
+window.hideKeyboard = function() {
+    if (document.activeElement) {
+        document.activeElement.blur();
+    }
+};
+
 // ---- Dışa Aktarımlar ----
 export {
     autoSave,
