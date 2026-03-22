@@ -1,6 +1,6 @@
 {
-  "name": "NotApp",
-  "short_name": "NotApp",
+  "name": "NoteJust",
+  "short_name": "NoteJust",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#18181b",
@@ -8,14 +8,16 @@
   "description": "Modern ve Hızlı Not Alma Uygulaması",
   "icons": [
     {
-      "src": "https://via.placeholder.com/192",
+      "src": "favicon.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "https://via.placeholder.com/512",
+      "src": "favicon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
