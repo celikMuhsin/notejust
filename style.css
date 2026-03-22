@@ -1128,13 +1128,14 @@ ol.custom-paren-alpha>li::before {
         border-left: none !important;
         border-right: none !important;
         border-bottom: none !important;
-        padding: 8px 4px !important;
+        padding: 8px 12px !important;
         background-color: #18181b !important;
         transform: none !important;
         /* Y animasyonları iptal */
         flex-direction: row !important;
         /* Tek satır */
         overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
         /* Sağ sola kaydırma */
         white-space: nowrap !important;
         flex-wrap: nowrap !important;
@@ -1162,6 +1163,7 @@ ol.custom-paren-alpha>li::before {
 
     .toolbar-row {
         width: auto !important;
+        flex-shrink: 0 !important; /* Kapanıp büzüşmesini engelle */
         flex-wrap: nowrap !important;
         justify-content: flex-start !important;
         padding-bottom: 2px;
@@ -1171,8 +1173,9 @@ ol.custom-paren-alpha>li::before {
     /* Mobilde yatay çizgileri dikey yap veya gizle, çünkü flex-direction row */
     .toolbar-divider-horizontal {
         width: 1px !important;
+        flex-shrink: 0 !important;
         height: 24px !important;
-        margin: 0 4px !important;
+        margin: 0 8px !important;
     }
 
     /* Butonları dokunmatik için biraz büyütme */
