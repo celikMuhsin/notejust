@@ -1131,6 +1131,7 @@ ol.custom-paren-alpha>li::before {
         border: none !important;
         padding: 8px 12px !important;
         background-color: #fff !important; /* Arka planı transparan olmasın */
+        color: #000 !important; /* Beyaz arka planda metinler siyah olsun */
         transform: none !important;
         flex-direction: row !important;
         overflow-x: auto !important;
@@ -1139,32 +1140,6 @@ ol.custom-paren-alpha>li::before {
         flex-wrap: nowrap !important;
         justify-content: flex-start !important;
         box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4) !important;
-    }
-
-    /* İkon ve Metin Kontrastı (#333) */
-    .floating-toolbar button,
-    .floating-toolbar span,
-    .floating-toolbar select,
-    .floating-toolbar input {
-        color: #333 !important;
-    }
-
-    .floating-toolbar svg,
-    .floating-toolbar svg path,
-    .floating-toolbar svg rect,
-    .floating-toolbar svg circle,
-    .floating-toolbar svg line,
-    .floating-toolbar svg polyline,
-    .floating-toolbar svg polygon {
-        fill: #333 !important;
-        stroke: #333 !important;
-    }
-
-    /* Özel durumlar için düzeltmeler */
-    .floating-toolbar .color-indicator {
-        -webkit-background-clip: initial !important;
-        background-clip: initial !important;
-        color: #333 !important;
     }
 
     .floating-toolbar::-webkit-scrollbar {
@@ -1220,7 +1195,7 @@ ol.custom-paren-alpha>li::before {
         height: 30px !important;
     }
 
-    /* Popup Menülerin Yukarı Açılması (Drop-up) */
+    /* Popup Menülerin Yukarı Açılması */
     .popup-menu {
         top: auto !important;
         bottom: 100% !important;
@@ -1229,16 +1204,8 @@ ol.custom-paren-alpha>li::before {
         transform: translateX(0) !important;
         left: 4px !important;
         /* Sola yapışık */
-        max-height: 200px !important;
-        overflow-y: auto !important;
-        background-color: #fff !important;
-        color: #333 !important;
-        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2) !important;
-    }
-    
-    .popup-menu div, 
-    .popup-menu span {
-        color: #333 !important;
+        max-height: 50vh;
+        overflow-y: auto;
     }
 
     /* Resimlerin Mobilde Taşmasını ve Kaybolmasını Önleme (Stacking) */
