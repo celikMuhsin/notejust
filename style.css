@@ -1123,8 +1123,7 @@ ol.custom-paren-alpha>li::before {
     .floating-toolbar {
         position: fixed !important;
         top: auto !important;
-        bottom: 0 !important;
-        bottom: var(--keyboard-offset, 0px) !important;
+        bottom: 0;
         left: 0 !important;
         width: 100% !important;
         border-radius: 0 !important;
@@ -1159,8 +1158,7 @@ ol.custom-paren-alpha>li::before {
     /* Docked modunu eziyoruz */
     .floating-toolbar.docked {
         position: fixed !important;
-        bottom: 0 !important;
-        bottom: var(--keyboard-offset, 0px) !important;
+        bottom: 0;
         top: auto !important;
         left: 0 !important;
         right: auto !important;
