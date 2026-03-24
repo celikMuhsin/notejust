@@ -29,6 +29,19 @@
 
         <!-- Sol Kenar Çubuğu -->
         <aside class="sidebar" id="sidebar">
+            <!-- Sidebar Logo Alanı -->
+            <div class="sidebar-header">
+                <button class="mobile-menu-btn" id="sidebar-close-btn" title="Kapat">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <img src="logo.png" alt="Logo" class="sidebar-logo-img">
+                <span class="sidebar-logo-text">NoteJust</span>
+            </div>
             <div class="sidebar-actions">
                 <button class="new-note-btn action-btn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -57,16 +70,21 @@
         <!-- Sağ Metin Editörü -->
         <main class="editor">
             <div class="editor-header">
-                <button class="mobile-menu-btn" id="mobile-menu-btn" title="Menü" style="display: none;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                </button>
-                <input type="text" class="note-title" placeholder="Not Başlığı..." autocomplete="off">
-                <div class="note-date" id="note-date-display"></div>
+                <div class="header-top-row">
+                    <div class="header-left-group">
+                        <button class="mobile-menu-btn" id="mobile-menu-btn" title="Menü" style="display: none;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="note-date" id="note-date-display"></div>
+                </div>
+                <!-- Çok satırlı başlık için input textarea'ya çevrildi -->
+                <textarea class="note-title" placeholder="Not Başlığı..." autocomplete="off" rows="1"></textarea>
             </div>
             <div class="note-content" id="note-content" contenteditable="true"
                 data-placeholder="Notunuzu buraya yazın..."></div>
@@ -76,206 +94,201 @@
     <!-- Gelişmiş Yüzen Araç Çubuğu (Extended Rich Text Toolbar) -->
     <div id="floating-toolbar" class="floating-toolbar">
 
-        <!-- ÜST SATIR -->
-        <div class="toolbar-row">
-            <!-- Punto büyüklük ayarı -->
-            <div class="font-size-control" title="Punto">
-                <button onmousedown="event.preventDefault(); changeFontSize(-1)">-</button>
-                <input type="number" id="font-size-input" value="16" min="8" max="72"
-                    onkeydown="if(event.key==='Enter'){event.preventDefault(); changeFontSize(0);}"
-                    onchange="changeFontSize(0)">
-                <button onmousedown="event.preventDefault(); changeFontSize(1)">+</button>
+        <!-- Mobil İçin Kaydırılabilir İçerik Alanı -->
+        <div class="toolbar-content">
+            <div class="toolbar-row">
+                <!-- 1. Kalın -->
+                <button onmousedown="event.preventDefault(); formatText('bold')" title="Kalın"><b>B</b></button>
+                <!-- 2. İtalik -->
+                <button onmousedown="event.preventDefault(); formatText('italic')" title="İtalik"><i
+                        style="font-family: serif;">I</i></button>
+                <!-- 3. Altı Çizili -->
+                <button onmousedown="event.preventDefault(); formatText('underline')" title="Altı Çizili"><u>U</u></button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 4. Metin Rengi -->
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleColorPalette('foreColor', event)" title="Metin Rengi">
+                    <span class="color-indicator"
+                        style="background: linear-gradient(to right, red, orange, green, blue); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 1.15rem;">A</span>
+                </button>
+
+                <!-- 5. Arka Plan Rengi -->
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleColorPalette('backColor', event)" title="Arka Plan Rengi">
+                    <span class="color-indicator"
+                        style="background: linear-gradient(to right, red, orange, green, blue); color: #000; padding: 0 5px 0 3px; border-radius: 2px;">A</span>
+                </button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 6. İndisler -->
+                <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('subscript')" title="Alt İndis"
+                    style="font-size:0.9rem;">x<span class="sub-text">2</span></button>
+                <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('superscript')" title="Üst İndis"
+                    style="font-size:0.9rem;">x<span class="sup-text">2</span></button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 7. Büyük/Küçük Harf -->
+                <button class="color-picker-btn" onmousedown="event.preventDefault(); toggleDropdown('case-palette', event)"
+                    title="Büyük/Küçük Harf Değiştir" style="width: auto; padding: 0 6px;">
+                    <span style="font-size: 1.05rem; position: relative; top: -1px;">A<span
+                            style="font-size: 0.75rem; top: 1px; position: relative;">a</span></span> <span
+                        style="font-size: 0.65rem; margin-left: 2px;">▾</span>
+                </button>
+
+                <!-- 8. Biçimi Temizle -->
+                <button class="color-picker-btn" onmousedown="event.preventDefault(); clearFormat()"
+                    title="Biçimi Temizle / Bloğu Kapat" style="width: auto; padding: 0 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <g transform="translate(-1, -1)">
+                            <path d="M12 3 L4 21 M12 3 L20 21" stroke="#ceced2" stroke-width="2" />
+                            <path d="M7 14 L17 14" stroke="#ceced2" stroke-width="2" />
+                        </g>
+                        <g transform="translate(17, 16) rotate(40)">
+                            <rect x="-4" y="-6" width="8" height="12" rx="1.5" fill="#27272a" stroke="#d946ef"
+                                stroke-width="1.5" />
+                            <line x1="-4" y1="2" x2="4" y2="2" stroke="#d946ef" stroke-width="1.5" />
+                        </g>
+                    </svg>
+                </button>
+
+                <!-- 9. Biçim Boyacısı -->
+                <button id="format-painter-btn" class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleFormatPainter()" title="Biçim Boyacısı"
+                    style="width: auto; padding: 0 8px;">
+                    <svg width="26" height="26" viewBox="-2 -2 28 28" fill="none" stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="paint_grad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="45%" stop-color="#ffffff" />
+                                <stop offset="45%" stop-color="#fbbf24" />
+                            </linearGradient>
+                        </defs>
+                        <g transform="rotate(45 12 12)">
+                            <path d="M9.5 3.5 C9.5 1.5 14.5 1.5 14.5 3.5 L13.5 9 L10.5 9 Z" fill="#e4e4e7" stroke="#71717a"
+                                stroke-width="1.5" />
+                            <path d="M7.5 10 L16.5 10 L16.5 18 C15.5 20.5 8.5 20.5 7.5 18 Z" fill="url(#paint_grad)"
+                                stroke="#d97706" stroke-width="1.5" />
+                            <rect x="6.5" y="8" width="11" height="3" rx="0.5" fill="#d4d4d8" stroke="#71717a"
+                                stroke-width="1.5" />
+                        </g>
+                    </svg>
+                </button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 10. Punto Ayarı -->
+                <div class="font-size-control">
+                    <button onmousedown="event.preventDefault(); changeFontSize(-1)">-</button>
+                    <input type="number" id="font-size-input" value="16" min="8" max="72"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault(); changeFontSize(0);}"
+                        onchange="changeFontSize(0)">
+                    <button onmousedown="event.preventDefault(); changeFontSize(1)">+</button>
+                </div>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 11. Hizalama -->
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleDropdown('align-palette', event)" title="Hizalama"
+                    style="width: auto; padding: 0 8px; color: #a1a1aa;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 6h16M7 10h10M4 14h16M7 18h10" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span style="font-size: 0.65rem; margin-left: 2px;">▾</span>
+                </button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 12. Madde İşaretleri -->
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleDropdown('bullet-palette', event)" title="Madde İşaretleri"
+                    style="width: auto; padding: 0 8px; color: #eaeaea;">
+                    <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="4.5" width="2.5" height="2.5" fill="#0078D4" />
+                        <rect x="1" y="9.5" width="2.5" height="2.5" fill="#0078D4" />
+                        <rect x="1" y="14.5" width="2.5" height="2.5" fill="#0078D4" />
+                        <rect x="6" y="5.25" width="11" height="1" fill="currentColor" />
+                        <rect x="6" y="10.25" width="11" height="1" fill="currentColor" />
+                        <rect x="6" y="15.25" width="11" height="1" fill="currentColor" />
+                        <path d="M21 9 L24 12 L27 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <!-- 13. Numaralandırma -->
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleDropdown('number-palette', event)" title="Numaralandırma"
+                    style="width: auto; padding: 0 8px; color: #eaeaea;">
+                    <svg width="24" height="17" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="font-family:sans-serif; font-size:7.5px; font-weight:bold;">
+                        <text x="0" y="8" fill="#0078D4">1</text>
+                        <text x="0" y="14" fill="#0078D4">2</text>
+                        <text x="0" y="20" fill="#0078D4">3</text>
+                        <rect x="9" y="5.5" width="11" height="1" fill="currentColor" />
+                        <rect x="9" y="11.5" width="11" height="1" fill="currentColor" />
+                        <rect x="9" y="17.5" width="11" height="1" fill="currentColor" />
+                        <path d="M22 9 L25 12 L28 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 14. Girintiyi Azalt/Artır -->
+                <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('outdent')"
+                    title="Girintiyi Azalt" style="width: auto; padding: 0 6px; color: #eaeaea;">
+                    <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6H20" stroke="#52525b" stroke-width="2" />
+                        <path d="M4 18H20" stroke="#52525b" stroke-width="2" />
+                        <path d="M9 12H4.5M4.5 12L7 9.5M4.5 12L7 14.5" stroke="#2563eb" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12.5 10H19" stroke="#52525b" stroke-width="2" />
+                        <path d="M12.5 14H19" stroke="#52525b" stroke-width="2" />
+                    </svg>
+                </button>
+
+                <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('indent')"
+                    title="Girintiyi Artır" style="width: auto; padding: 0 6px; color: #eaeaea;">
+                    <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6H20" stroke="#52525b" stroke-width="2" />
+                        <path d="M4 18H20" stroke="#52525b" stroke-width="2" />
+                        <path d="M4.5 12H9M9 12L6.5 9.5M9 12L6.5 14.5" stroke="#2563eb" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12.5 10H19" stroke="#52525b" stroke-width="2" />
+                        <path d="M12.5 14H19" stroke="#52525b" stroke-width="2" />
+                    </svg>
+                </button>
+
+                <div class="toolbar-divider"></div>
+
+                <!-- 15. Stil ve Ekle -->
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleDropdown('style-palette', event)" title="Metin Stili"
+                    style="width: auto; padding: 0 8px; font-weight: 600;">
+                    <span style="font-size: 0.85rem;">Stil ▾</span>
+                </button>
+
+                <button class="color-picker-btn"
+                    onmousedown="event.preventDefault(); toggleDropdown('insert-palette', event)" title="Ekle"
+                    style="width: auto; padding: 0 8px; font-weight: 600;">
+                    <span style="font-size: 0.85rem;">Ekle ▾</span>
+                </button>
+
             </div>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Hizalama (Alignment) -->
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleDropdown('align-palette', event)" title="Hizalama"
-                style="width: auto; padding: 0 8px; color: #a1a1aa;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M4 6h16M7 10h10M4 14h16M7 18h10" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <span style="font-size: 0.65rem; margin-left: 2px;">▾</span>
-            </button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Madde İşaretleri -->
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleDropdown('bullet-palette', event)" title="Madde İşaretleri"
-                style="width: auto; padding: 0 8px; color: #eaeaea;">
-                <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="1" y="4.5" width="2.5" height="2.5" fill="#0078D4" />
-                    <rect x="1" y="9.5" width="2.5" height="2.5" fill="#0078D4" />
-                    <rect x="1" y="14.5" width="2.5" height="2.5" fill="#0078D4" />
-                    <rect x="6" y="5.25" width="11" height="1" fill="currentColor" />
-                    <rect x="6" y="10.25" width="11" height="1" fill="currentColor" />
-                    <rect x="6" y="15.25" width="11" height="1" fill="currentColor" />
-                    <path d="M21 9 L24 12 L27 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Numaralandırma -->
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleDropdown('number-palette', event)" title="Numaralandırma"
-                style="width: auto; padding: 0 8px; color: #eaeaea;">
-                <svg width="24" height="17" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                    style="font-family:sans-serif; font-size:10.5px; font-weight:bold;">
-                    <text x="0" y="8" fill="#0078D4">1</text>
-                    <text x="0" y="14" fill="#0078D4">2</text>
-                    <text x="0" y="20" fill="#0078D4">3</text>
-                    <rect x="9" y="4.5" width="11" height="1" fill="currentColor" />
-                    <rect x="9" y="10.5" width="11" height="1" fill="currentColor" />
-                    <rect x="9" y="16.5" width="11" height="1" fill="currentColor" />
-                    <path d="M22 9 L25 12 L28 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Girintiyi Azalt -->
-            <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('outdent')"
-                title="Girintiyi Azalt" style="width: auto; padding: 0 6px; color: #eaeaea;">
-                <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 6H20" stroke="#52525b" stroke-width="2" />
-                    <path d="M4 18H20" stroke="#52525b" stroke-width="2" />
-                    <path d="M9 12H4.5M4.5 12L7 9.5M4.5 12L7 14.5" stroke="#2563eb" stroke-width="2.2"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M12.5 10H19" stroke="#52525b" stroke-width="2" />
-                    <path d="M12.5 14H19" stroke="#52525b" stroke-width="2" />
-                </svg>
-            </button>
-
-            <!-- Girintiyi Artır -->
-            <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('indent')"
-                title="Girintiyi Artır" style="width: auto; padding: 0 6px; color: #eaeaea;">
-                <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 6H20" stroke="#52525b" stroke-width="2" />
-                    <path d="M4 18H20" stroke="#52525b" stroke-width="2" />
-                    <path d="M4.5 12H9M9 12L6.5 9.5M9 12L6.5 14.5" stroke="#2563eb" stroke-width="2.2"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M12.5 10H19" stroke="#52525b" stroke-width="2" />
-                    <path d="M12.5 14H19" stroke="#52525b" stroke-width="2" />
-                </svg>
-            </button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Stil Seçici (Heading / Paragraph) -->
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleDropdown('style-palette', event)" title="Metin Stili"
-                style="width: auto; padding: 0 8px; font-weight: 600;">
-                <span style="font-size: 0.85rem;">Stil ▾</span>
-            </button>
-
-            <!-- Ekle Menüsü -->
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleDropdown('insert-palette', event)" title="Ekle"
-                style="width: auto; padding: 0 8px; font-weight: 600;">
-                <span style="font-size: 0.85rem;">Ekle ▾</span>
-            </button>
         </div>
+        
+        <!-- Klavyeyi Gizle Butonu (En sağda sabit duracak) -->
+        <button onmousedown="event.preventDefault(); hideKeyboard()" title="Klavyeyi Gizle" class="color-picker-btn hide-keyboard-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+            </svg>
+        </button>
 
-        <div class="toolbar-divider-horizontal" style="width: 100%; height: 1px; background: #3f3f46; margin: 2px 0;">
-        </div>
-
-        <!-- ALT SATIR -->
-        <div class="toolbar-row">
-            <!-- Kalın -->
-            <button onmousedown="event.preventDefault(); formatText('bold')" title="Kalın"><b>B</b></button>
-            <!-- İtalik -->
-            <button onmousedown="event.preventDefault(); formatText('italic')" title="İtalik"><i
-                    style="font-family: serif;">I</i></button>
-            <!-- Altı Çizili -->
-            <button onmousedown="event.preventDefault(); formatText('underline')" title="Altı Çizili"><u>U</u></button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Renkler (Özel Açılır Menülü Palette) -->
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleColorPalette('foreColor', event)" title="Metin Rengi">
-                <span class="color-indicator"
-                    style="background: linear-gradient(to right, red, orange, green, blue); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 1.15rem;">A</span>
-            </button>
-
-            <button class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleColorPalette('backColor', event)" title="Arka Plan Rengi">
-                <span class="color-indicator"
-                    style="background: linear-gradient(to right, red, orange, green, blue); color: #000; padding: 0 5px 0 3px; border-radius: 2px;">A</span>
-            </button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- İndisler -->
-            <button onmousedown="event.preventDefault(); formatText('subscript')" title="Alt İndis"
-                style="font-size:0.9rem;">X<span class="sub-text">2</span></button>
-            <button onmousedown="event.preventDefault(); formatText('superscript')" title="Üst İndis"
-                style="font-size:0.9rem;">X<span class="sup-text">2</span></button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Büyük/Küçük Harf (Change Case) -->
-            <button class="color-picker-btn" onmousedown="event.preventDefault(); toggleDropdown('case-palette', event)"
-                title="Büyük/Küçük Harf Değiştir" style="width: auto; padding: 0 6px;">
-                <span style="font-size: 1.05rem; position: relative; top: -1px;">A<span
-                        style="font-size: 0.75rem; top: 1px; position: relative;">a</span></span> <span
-                    style="font-size: 0.65rem; margin-left: 2px;">▾</span>
-            </button>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- Biçimi Temizle -->
-            <button class="color-picker-btn" onmousedown="event.preventDefault(); clearFormat()"
-                title="Biçimi Temizle / Bloğu Kapat" style="width: auto; padding: 0 8px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <g transform="translate(-1, -1)">
-                        <path d="M12 3 L4 21 M12 3 L20 21" stroke="#ceced2" stroke-width="2" />
-                        <path d="M7 14 L17 14" stroke="#ceced2" stroke-width="2" />
-                    </g>
-                    <g transform="translate(17, 16) rotate(40)">
-                        <rect x="-4" y="-6" width="8" height="12" rx="1.5" fill="#27272a" stroke="#d946ef"
-                            stroke-width="1.5" />
-                        <line x1="-4" y1="2" x2="4" y2="2" stroke="#d946ef" stroke-width="1.5" />
-                    </g>
-                </svg>
-            </button>
-
-            <!-- Biçim Boyacısı -->
-            <button id="format-painter-btn" class="color-picker-btn"
-                onmousedown="event.preventDefault(); toggleFormatPainter()" title="Biçim Boyacısı"
-                style="width: auto; padding: 0 8px;">
-                <svg width="26" height="26" viewBox="-2 -2 28 28" fill="none" stroke-linejoin="round">
-                    <defs>
-                        <linearGradient id="paint_grad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="45%" stop-color="#ffffff" />
-                            <stop offset="45%" stop-color="#fbbf24" />
-                        </linearGradient>
-                    </defs>
-                    <g transform="rotate(45 12 12)">
-                        <path d="M9.5 3.5 C9.5 1.5 14.5 1.5 14.5 3.5 L13.5 9 L10.5 9 Z" fill="#e4e4e7" stroke="#71717a"
-                            stroke-width="1.5" />
-                        <path d="M7.5 10 L16.5 10 L16.5 18 C15.5 20.5 8.5 20.5 7.5 18 Z" fill="url(#paint_grad)"
-                            stroke="#d97706" stroke-width="1.5" />
-                        <rect x="6.5" y="8" width="11" height="3" rx="0.5" fill="#d4d4d8" stroke="#71717a"
-                            stroke-width="1.5" />
-                    </g>
-                </svg>
-            </button>
-
-            <!-- Klavye Kapatma Butonu (Mobil İçin Kritik) -->
-            <button onmousedown="event.preventDefault(); hideKeyboard()" title="Klavyeyi Gizle" class="color-picker-btn hide-keyboard-btn">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-                </svg>
-            </button>
-        </div>
         <!-- ======================= -->
         <!-- YÜZEN MENÜLER (POPUPLAR) -->
         <!-- ======================= -->
@@ -383,7 +396,7 @@
                 Numaralandırma</div>
             <div class="number-grid" style="margin-bottom: 0;">
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('none')" title="Yok"
-                    style="font-size: 0.85rem;">Yok</div>
+                    style="font-size: 0.85rem; color: #eaeaea;">Yok</div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('decimal')"
                     title="Sayı (1. 2. 3.)">

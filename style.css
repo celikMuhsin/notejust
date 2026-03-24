@@ -199,9 +199,63 @@ body {
     gap: 16px;
 }
 
+.note-date {
+    order: 2; /* Masaüstünde sağda olması için */
+    color: #a1a1aa;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.header-top-row {
+    display: contents; /* Masaüstünde yapıyı bozmasın, elemanlar direkt header'a bağlı gibi davransın */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 32px;
+    padding-left: 2px;
+}
+
+.sidebar-logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    margin-left: 12px;
+    mix-blend-mode: screen;
+    filter: contrast(1.1) brightness(1.2);
+}
+
+.sidebar-logo-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+#sidebar-close-btn {
+    display: none; /* Masaüstünde gizle */
+    padding: 4px;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: #ceced2;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+#sidebar-close-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
 .note-title {
     flex: 1;
     min-width: 0;
+    order: 1; /* Masaüstünde solda olması için */
     background: transparent;
     border: none;
     color: #ffffff;
@@ -210,6 +264,9 @@ body {
     font-weight: 700;
     outline: none;
     line-height: 1.2;
+    resize: none;
+    overflow: hidden;
+    padding: 0;
 }
 
 .note-title::placeholder {
@@ -266,7 +323,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 0px; /* 2px -> 0px */
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     opacity: 0;
     pointer-events: none;
@@ -278,7 +335,7 @@ body {
 .toolbar-row {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 0px; /* 2px -> 0px */
     width: 100%;
     justify-content: center;
 }
@@ -298,17 +355,14 @@ body {
     margin: 0 4px !important;
 }
 
-/* Tek satır modunda sıralamayı (Bold tarafı başa gelecek şekilde) değiştir */
-.floating-toolbar.docked>.toolbar-row:nth-child(1) {
-    order: 3;
-}
-
-.floating-toolbar.docked>.toolbar-divider-horizontal {
-    order: 2;
-}
-
-.floating-toolbar.docked>.toolbar-row:nth-child(3) {
+/* Sabit Modda HTML Sırasını Kullan */
+.floating-toolbar.docked>.toolbar-row {
     order: 1;
+}
+
+/* Klavyeyi Gizle butonu varsayılan olarak (masaüstünde) kapalı */
+.hide-keyboard-btn {
+    display: none !important;
 }
 
 .floating-toolbar.visible {
@@ -339,17 +393,17 @@ body {
 
 /* YENİ EKLENTİLER: Toolbar Geliştirmeleri */
 .sub-text {
-    font-size: 0.75em;
+    font-size: 0.65em;
     position: relative;
-    top: 0.4em;
+    top: 0.6em; /* 0.4em -> 0.6em (Daha aşağı alındı) */
     color: #0078D4;
     line-height: 0;
 }
 
 .sup-text {
-    font-size: 0.75em;
+    font-size: 0.65em;
     position: relative;
-    top: -0.4em;
+    top: -0.5em; /*-0.4em -> -0.5em (Daha belirgin üst indis) */
     color: #0078D4;
     line-height: 0;
 }
@@ -358,13 +412,13 @@ body {
     width: 1px;
     height: 20px;
     background-color: #3f3f46;
-    margin: 0 4px;
+    margin: 0 5px; /* 1px -> 5px (Daha belirgin ayrım) */
 }
 
 /* Özel Renk Seçici ve Genel Menü Butonları */
 .color-picker-btn {
     position: relative;
-    width: 28px;
+    width: 16px; /* 22px -> 16px (Ekstrem Compact) */
     height: 26px;
     cursor: pointer;
     display: flex;
@@ -1059,7 +1113,7 @@ ol.custom-paren-alpha>li::before {
         color: #ceced2;
         cursor: pointer;
         padding: 4px;
-        margin-right: 8px;
+        margin-right: 4px;
     }
 
     /* Sol Kenar Çubuğu (Sidebar) Gizleme ve Kaydırma Animasyonu */
@@ -1082,9 +1136,14 @@ ol.custom-paren-alpha>li::before {
 
     /* Üst butonlar (Yeni Not / Klasör) mobilde daha küçük */
     .action-btn {
-        padding: 8px;
-        font-size: 0.85rem;
-        gap: 4px;
+        padding: 8px 4px;
+        font-size: 0.75rem;
+        gap: 3px;
+    }
+
+    .action-btn svg {
+        width: 16px;
+        height: 16px;
     }
 
     /* Arka Plan Karartması (Overlay) */
@@ -1107,13 +1166,46 @@ ol.custom-paren-alpha>li::before {
     }
 
     /* Editör Başlık ve Padding Ayarı */
+    .editor-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .header-top-row {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        order: 1; /* Mobilde en üst satırda */
+    }
+
+    .note-title {
+        font-size: 1.3rem;
+        width: 100%;
+        order: 2; /* Mobilde alt satırda */
+    }
+
+    #sidebar-close-btn {
+        display: flex !important; /* Mobilde göster */
+    }
+
     .editor {
         padding: 20px 16px;
     }
 
     .note-title {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
+        width: 100%;
     }
+
+    .note-content {
+        font-size: 0.95rem;
+    }
+
+    .note-content h1 { font-size: 1.4rem; }
+    .note-content h2 { font-size: 1.2rem; }
+    .note-content h3 { font-size: 1.05rem; }
 
     .note-date {
         font-size: 0.75rem;
@@ -1132,21 +1224,75 @@ ol.custom-paren-alpha>li::before {
         padding: 8px 12px !important;
         background-color: #fff !important; /* Arka planı transparan olmasın */
         color: #000 !important; /* Beyaz arka planda metinler siyah olsun */
-        transform: none !important;
+        display: flex !important;
         flex-direction: row !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
+        align-items: center !important; /* Dikeyde ortala */
         white-space: nowrap !important;
         flex-wrap: nowrap !important;
         justify-content: flex-start !important;
         box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4) !important;
+        overflow: visible !important;
     }
 
-    .floating-toolbar::-webkit-scrollbar {
+    .toolbar-content {
+        display: flex;
+        flex-direction: row !important;
+        flex: 1 !important; /* Diğer alanı kapla */
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 4px 6px;
+    }
+
+    /* Mobilde Klavyeyi Gizle butonunu araç çubuğunun en sağında sabit tut */
+    .hide-keyboard-btn {
+        display: flex !important;
+        position: relative !important;
+        flex-shrink: 0 !important;
+        width: 32px !important; /* 44px -> 32px (Soldaki fazlalık atıldı) */
+        height: 38px !important; /* Diğer butonlarla benzer yükseklik */
+        background-color: #fff !important;
+        color: #1f2937 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        z-index: 10000 !important;
+        box-shadow: none !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .toolbar-row {
+        width: auto !important;
+        flex-shrink: 0 !important;
+        flex-wrap: nowrap !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding-bottom: 0px !important; /* Alt boşluk sıfırlandı */
+    }
+
+    /* Solundaki ayracı diğerleriyle aynı yap */
+    .hide-keyboard-btn::before {
+        content: "";
+        width: 1px;
+        height: 20px;
+        background-color: #e2e8f0 !important;
+        position: absolute;
+        left: 0; /* Tam sol kenarda başla (Solunda kapatacak alan kalmadı) */
+        top: 46% !important; /* 1px daha yukarı alındı */
+        transform: translateY(-50%);
+    }
+
+    .hide-keyboard-btn svg {
+        width: 16px !important; /* Biraz daha küçültüldü */
+        height: 16px !important;
+        margin-top: -3px !important; /* 1px daha yukarı alındı */
+    }
+
+    .toolbar-content::-webkit-scrollbar {
         height: 4px;
     }
 
-    .floating-toolbar::-webkit-scrollbar-thumb {
+    .toolbar-content::-webkit-scrollbar-thumb {
         background: #3e3e42;
         border-radius: 4px;
     }
@@ -1164,11 +1310,12 @@ ol.custom-paren-alpha>li::before {
 
     .toolbar-row {
         width: auto !important;
-        flex-shrink: 0 !important; /* Kapanıp büzüşmesini engelle */
+        flex-shrink: 0 !important;
         flex-wrap: nowrap !important;
+        display: flex !important;
+        align-items: center !important; /* İkonları dikeyde ortala */
         justify-content: flex-start !important;
         padding-bottom: 2px;
-        /* Scrollbar için yer */
     }
 
     /* Mobilde yatay çizgileri dikey yap veya gizle, çünkü flex-direction row */
@@ -1179,33 +1326,71 @@ ol.custom-paren-alpha>li::before {
         margin: 0 8px !important;
     }
 
-    /* Butonları dokunmatik için biraz büyütme */
+    /* Butonları dokunmatik için biraz büyütme (Genişlik kısıtlaması kaldırıldı) */
     .floating-toolbar button,
     .color-picker-btn {
-        min-width: 36px !important;
+        min-width: 16px !important; /* 36px -> 16px */
         height: 36px !important;
     }
 
     .font-size-control {
         height: 30px !important;
+        background: transparent !important;
+        border: 1px solid #e2e8f0 !important;
     }
 
     .font-size-control button,
     .font-size-control input {
         height: 30px !important;
+        background: transparent !important;
+        color: #1f2937 !important;
     }
 
-    /* Popup Menülerin Yukarı Açılması */
+    /* İkonları ve Metinleri Koyulaştırma */
+    .floating-toolbar button,
+    .floating-toolbar .color-picker-btn {
+        color: #1f2937 !important;
+    }
+
+    /* Yatay Bölücüler (Dividers) */
+    .toolbar-divider,
+    .toolbar-divider-horizontal {
+        background-color: #e2e8f0 !important;
+    }
+
+    /* Özel SVG Renk Düzeltmeleri (Soluk Gri -> Koyu Gri) */
+    .floating-toolbar svg path[stroke="#52525b"],
+    .floating-toolbar svg path[stroke="#71717a"],
+    .floating-toolbar svg text[fill="#71717a"],
+    .floating-toolbar svg rect[fill="#71717a"] {
+        stroke: #4b5563 !important;
+        fill: #4b5563 !important;
+    }
+
+    /* Hizalama ve Diğer Gri İkonlar */
+    .floating-toolbar button[style*="color: #a1a1aa"],
+    .floating-toolbar button[style*="color: #ceced2"] {
+        color: #1f2937 !important;
+    }
+    
+    .floating-toolbar svg path[stroke="#a1a1aa"],
+    .floating-toolbar svg path[stroke="#ceced2"] {
+        stroke: #1f2937 !important;
+    }
+
+    /* Popup Menülerin Yukarı Açılması - Mobilde Fixed yapıyoruz */
     .popup-menu {
+        position: fixed !important;
         top: auto !important;
-        bottom: 100% !important;
-        /* Toolbarın üstünde açıl */
-        margin-bottom: 8px;
+        bottom: 66px !important; /* Toolbar yüksekliği + margin */
+        /* Ekranın solunda */
+        margin-bottom: 0;
         transform: translateX(0) !important;
         left: 4px !important;
-        /* Sola yapışık */
+        right: 4px !important; /* Genişliği kısıtla */
         max-height: 50vh;
         overflow-y: auto;
+        z-index: 9999999 !important; /* Toolbarın da üstünde */
     }
 
     /* Resimlerin Mobilde Taşmasını ve Kaybolmasını Önleme (Stacking) */

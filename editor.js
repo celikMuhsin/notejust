@@ -69,7 +69,15 @@ function autoSave() {
     saveDataToDB();
 }
 
-titleInput.addEventListener('input', autoSave);
+function adjustTitleHeight() {
+    titleInput.style.height = 'auto';
+    titleInput.style.height = titleInput.scrollHeight + 'px';
+}
+
+titleInput.addEventListener('input', () => {
+    adjustTitleHeight();
+    autoSave();
+});
 contentInput.addEventListener('input', autoSave);
 
 // -----------------------------------------------------
@@ -813,3 +821,26 @@ export {
     currentPaletteMode,
     currentDropdownId
 };
+// Sayfada boş bir yere basıldığında açık menüleri kapat
+// Sayfada boş bir yere basıldığında tüm açık menüleri kapat
+document.addEventListener('mousedown', function(e) {
+    const menus = document.querySelectorAll('.popup-menu');
+    let clickedInsideMenu = false;
+    let clickedOnButton = false;
+
+    menus.forEach(m => {
+        if (m.contains(e.target)) clickedInsideMenu = true;
+    });
+
+    // Menü açan butonlardan birine basılıp basılmadığını kontrol et
+    if (e.target.closest('button[onmousedown*="toggleDropdown"]') || 
+        e.target.closest('button[onmousedown*="toggleColorPalette"]')) {
+        clickedOnButton = true;
+    }
+
+    // Eğer menü dışına ve buton dışına basıldıysa tümünü kapat
+    if (!clickedInsideMenu && !clickedOnButton) {
+        menus.forEach(m => m.classList.add('hidden'));
+        currentDropdownId = null;
+    }
+});

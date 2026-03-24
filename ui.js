@@ -20,6 +20,12 @@ function setActiveNoteId(id) {
     activeNoteId = id;
 }
 
+function adjustTitleHeight() {
+    if (!titleInput) return;
+    titleInput.style.height = 'auto';
+    titleInput.style.height = titleInput.scrollHeight + 'px';
+}
+
 const months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
 function formatTurkishDate(timestamp) {
@@ -257,6 +263,7 @@ function deleteItem(id) {
         document.getElementById('note-content').innerHTML = '';
         document.querySelector('.note-title').disabled = true;
         document.getElementById('note-date-display').textContent = '';
+        adjustTitleHeight();
     }
 
     for (let i = items.length - 1; i >= 0; i--) {
@@ -279,6 +286,7 @@ function renameItem(id) {
         
         if (id === activeNoteId) {
             document.querySelector('.note-title').value = node.title;
+            adjustTitleHeight();
         }
 
         saveData();
@@ -566,6 +574,7 @@ function selectNote(id) {
         titleInput.disabled = false;
         noteDateDisplay.textContent = formatTurkishDate(note.updatedAt);
         
+        adjustTitleHeight();
         renderNotesList(); 
     }
 }
@@ -577,6 +586,7 @@ function createNewNote() {
     titleInput.disabled = false;
     noteDateDisplay.textContent = formatTurkishDate(Date.now());
     
+    adjustTitleHeight();
     renderNotesList();
     titleInput.focus();
 }
@@ -608,6 +618,14 @@ if (mobileMenuBtn && sidebarContent && sidebarOverlay) {
         sidebarContent.classList.add('open');
         sidebarOverlay.classList.add('active');
     });
+
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    if (sidebarCloseBtn) {
+        sidebarCloseBtn.addEventListener('click', () => {
+            sidebarContent.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+        });
+    }
 
     sidebarOverlay.addEventListener('click', () => {
         sidebarContent.classList.remove('open');
