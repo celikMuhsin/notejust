@@ -5,6 +5,8 @@ import { renderNotesList, selectNote, createNewNote, createNewFolder } from './u
 // ve HTML onclick kullanımı için gerekli olan global (window.*) atamalarını çalıştırır.
 import './editor.js';
 import './image-handler.js';
+import { initIOSKeyboardFix } from './ios-keyboard-fix.js';
+import { initThemeHandler } from './theme-handler.js';
 
 function init() {
     renderNotesList();
@@ -38,4 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // editor.js ve image-handler.js içerisinde doğrudan 'window' objesine 
     // eklenmiştir (Örn: window.formatText = function() {...}). 
     // Bu sayede dışarıdan herhangi bir ek atamaya gerek kalmaz.
+    // 3. iOS Klavye Fixini Başlat
+    initIOSKeyboardFix();
+
+    // 4. Gece Modu Yönetimini Başlat
+    initThemeHandler();
 });

@@ -184,24 +184,12 @@ function toggleDropdownMenu(e, node, btnElement) {
 
     const dropdown = document.createElement('div');
     dropdown.className = 'tree-dropdown-menu';
-    dropdown.style.position = 'absolute';
-    dropdown.style.background = '#18181b';
-    dropdown.style.border = '1px solid #3f3f46';
-    dropdown.style.borderRadius = '6px';
-    dropdown.style.padding = '4px 0';
-    dropdown.style.zIndex = '9999'; // Mobilde sidebar z-index'i yüksek olabileceği için artırıldı
-    dropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
-    dropdown.style.minWidth = '160px';
+    dropdown.style.position = 'absolute'; // Pozisyon hala dinamik kalmalı
     
     // Yeniden Adlandır Seçeneği
     const renameOption = document.createElement('div');
+    renameOption.className = 'tree-dropdown-item';
     renameOption.innerHTML = '✏️ Yeniden Adlandır';
-    renameOption.style.padding = '8px 12px';
-    renameOption.style.cursor = 'pointer';
-    renameOption.style.color = '#eaeaea';
-    renameOption.style.fontSize = '0.85rem';
-    renameOption.onmouseover = () => renameOption.style.background = '#3f3f46';
-    renameOption.onmouseout = () => renameOption.style.background = 'transparent';
     renameOption.onclick = (event) => {
         event.stopPropagation();
         renameItem(node.id);
@@ -211,13 +199,8 @@ function toggleDropdownMenu(e, node, btnElement) {
 
     // Sil Seçeneği
     const deleteOption = document.createElement('div');
+    deleteOption.className = 'tree-dropdown-item delete';
     deleteOption.innerHTML = '🗑️ Sil';
-    deleteOption.style.padding = '8px 12px';
-    deleteOption.style.cursor = 'pointer';
-    deleteOption.style.color = '#ef4444'; 
-    deleteOption.style.fontSize = '0.85rem';
-    deleteOption.onmouseover = () => deleteOption.style.background = '#3f3f46';
-    deleteOption.onmouseout = () => deleteOption.style.background = 'transparent';
     deleteOption.onclick = (event) => {
         event.stopPropagation();
         deleteItem(node.id);

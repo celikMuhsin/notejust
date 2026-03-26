@@ -81,7 +81,13 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="note-date" id="note-date-display"></div>
+                    <div class="note-date">
+                        <span id="note-date-display"></span>
+                        <button id="theme-toggle" class="theme-toggle-btn" title="Temayı Değiştir">
+                            <!-- JS ile dinamik dolacak, varsayılan güneş -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        </button>
+                    </div>
                 </div>
                 <!-- Çok satırlı başlık için input textarea'ya çevrildi -->
                 <textarea class="note-title" placeholder="Not Başlığı..." autocomplete="off" rows="1"></textarea>
@@ -194,7 +200,7 @@
                 <!-- 11. Hizalama -->
                 <button class="color-picker-btn"
                     onmousedown="event.preventDefault(); toggleDropdown('align-palette', event)" title="Hizalama"
-                    style="width: auto; padding: 0 8px; color: #a1a1aa;">
+                    style="width: auto; padding: 0 8px;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                         <path d="M4 6h16M7 10h10M4 14h16M7 18h10" stroke="currentColor" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round" />
@@ -207,7 +213,7 @@
                 <!-- 12. Madde İşaretleri -->
                 <button class="color-picker-btn"
                     onmousedown="event.preventDefault(); toggleDropdown('bullet-palette', event)" title="Madde İşaretleri"
-                    style="width: auto; padding: 0 8px; color: #eaeaea;">
+                    style="width: auto; padding: 0 8px;">
                     <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="1" y="4.5" width="2.5" height="2.5" fill="#0078D4" />
                         <rect x="1" y="9.5" width="2.5" height="2.5" fill="#0078D4" />
@@ -223,7 +229,7 @@
                 <!-- 13. Numaralandırma -->
                 <button class="color-picker-btn"
                     onmousedown="event.preventDefault(); toggleDropdown('number-palette', event)" title="Numaralandırma"
-                    style="width: auto; padding: 0 8px; color: #eaeaea;">
+                    style="width: auto; padding: 0 8px;">
                     <svg width="24" height="17" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                         style="font-family:sans-serif; font-size:7.5px; font-weight:bold;">
                         <text x="0" y="8" fill="#0078D4">1</text>
@@ -241,26 +247,26 @@
 
                 <!-- 14. Girintiyi Azalt/Artır -->
                 <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('outdent')"
-                    title="Girintiyi Azalt" style="width: auto; padding: 0 6px; color: #eaeaea;">
+                    title="Girintiyi Azalt" style="width: auto; padding: 0 6px;">
                     <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6H20" stroke="#52525b" stroke-width="2" />
-                        <path d="M4 18H20" stroke="#52525b" stroke-width="2" />
+                        <path d="M4 6H20" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
+                        <path d="M4 18H20" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
                         <path d="M9 12H4.5M4.5 12L7 9.5M4.5 12L7 14.5" stroke="#2563eb" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M12.5 10H19" stroke="#52525b" stroke-width="2" />
-                        <path d="M12.5 14H19" stroke="#52525b" stroke-width="2" />
+                        <path d="M12.5 10H19" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
+                        <path d="M12.5 14H19" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
                     </svg>
                 </button>
 
                 <button class="color-picker-btn" onmousedown="event.preventDefault(); formatText('indent')"
-                    title="Girintiyi Artır" style="width: auto; padding: 0 6px; color: #eaeaea;">
+                    title="Girintiyi Artır" style="width: auto; padding: 0 6px;">
                     <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6H20" stroke="#52525b" stroke-width="2" />
-                        <path d="M4 18H20" stroke="#52525b" stroke-width="2" />
+                        <path d="M4 6H20" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
+                        <path d="M4 18H20" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
                         <path d="M4.5 12H9M9 12L6.5 9.5M9 12L6.5 14.5" stroke="#2563eb" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M12.5 10H19" stroke="#52525b" stroke-width="2" />
-                        <path d="M12.5 14H19" stroke="#52525b" stroke-width="2" />
+                        <path d="M12.5 10H19" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
+                        <path d="M12.5 14H19" stroke="currentColor" stroke-opacity="0.6" stroke-width="2" />
                     </svg>
                 </button>
 
@@ -303,24 +309,24 @@
             <div class="style-item" style="font-size: 0.95rem; line-height: 1.2;"
                 onmousedown="event.preventDefault(); applyBlockStyle('P')">Paragraph</div>
             <div class="style-item"
-                style="font-size: 0.95rem; border-left: 3px solid #6366f1; padding-left: 6px; color: #a1a1aa; line-height: 1.2;"
+                style="font-size: 0.95rem; border-left: 3px solid #6366f1; padding-left: 6px; color: var(--text-muted); line-height: 1.2;"
                 onmousedown="event.preventDefault(); applyBlockStyle('BLOCKQUOTE')">Blockquote</div>
             <div class="style-item"
-                style="font-size: 0.85rem; font-family: monospace; background: #232326; padding: 6px; border-radius: 4px;"
+                style="font-size: 0.85rem; font-family: monospace; background: var(--bg-btn-secondary); color: var(--text-btn-secondary); padding: 6px; border-radius: 4px;"
                 onmousedown="event.preventDefault(); applyBlockStyle('PRE')">Code Block</div>
         </div>
 
         <!-- Ekle Menüsü (Images, Shapes, Icons) -->
         <div id="insert-palette" class="popup-menu hidden" style="min-width: 280px; padding: 12px;">
-            <div style="font-size: 0.8rem; font-weight: 600; color: #a1a1aa; margin-bottom: 12px; padding-left: 2px;">
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; padding-left: 2px;">
                 Nesne Ekle</div>
             <div class="insert-grid">
                 <!-- Resimler -->
                 <div class="insert-item" onmousedown="event.preventDefault(); triggerImageUpload()">
                     <div class="insert-icon-box">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="6" width="24" height="20" rx="2" stroke="#71717a" stroke-width="1.5" />
-                            <path d="M4 21L11 14L18 21M16 19L21 14L28 21" stroke="#71717a" stroke-width="1.5"
+                            <rect x="4" y="6" width="24" height="20" rx="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M4 21L11 14L18 21M16 19L21 14L28 21" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round" />
                             <circle cx="21" cy="11" r="2" fill="#f59e0b" />
                         </svg>
@@ -334,7 +340,7 @@
                     <div class="insert-icon-box">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="6" y="8" width="12" height="12" stroke="#3b82f6" stroke-width="1.5" />
-                            <circle cx="18" cy="18" r="7" stroke="#71717a" stroke-width="1.5" fill="#18181b" />
+                            <circle cx="18" cy="18" r="7" stroke="currentColor" stroke-width="1.5" fill="var(--bg-popup)" />
                         </svg>
                     </div>
                     <span>Şekiller</span>
@@ -347,9 +353,9 @@
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 14C10 11 14 10 16 12C18 10 22 11 22 14C22 18 16 22 16 22C16 22 10 18 10 14Z"
                                 stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M18 12C20 12 24 14 24 16 C24 20 17 25 16 26" stroke="#71717a" stroke-width="1.5"
+                            <path d="M18 12C20 12 24 14 24 16 C24 20 17 25 16 26" stroke="currentColor" stroke-width="1.5"
                                 stroke-opacity="0.5" />
-                            <path d="M8 18L12 24" stroke="#71717a" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M8 18L12 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         </svg>
                     </div>
                     <span>Simgeler</span>
@@ -360,7 +366,7 @@
 
         <!-- Madde İşareti (Bullet) Menüsü -->
         <div id="bullet-palette" class="popup-menu hidden" style="min-width: 260px;">
-            <div style="font-size: 0.8rem; font-weight: 600; color: #a1a1aa; margin-bottom: 8px; padding-left: 2px;">
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; padding-left: 2px;">
                 Madde İşareti Kitaplığı</div>
             <div class="bullet-grid-word">
                 <div class="bullet-swatch-word" onmousedown="event.preventDefault(); applyBulletStyle('none')"
@@ -392,94 +398,94 @@
 
         <!-- Numaralandırma (Number) Menüsü -->
         <div id="number-palette" class="popup-menu hidden" style="min-width: 250px;">
-            <div style="font-size: 0.8rem; font-weight: 600; color: #a1a1aa; margin-bottom: 6px; padding-left: 2px;">
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; padding-left: 2px;">
                 Numaralandırma</div>
             <div class="number-grid" style="margin-bottom: 0;">
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('none')" title="Yok"
-                    style="font-size: 0.85rem; color: #eaeaea;">Yok</div>
+                    style="font-size: 0.85rem; color: var(--text-main);">Yok</div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('decimal')"
                     title="Sayı (1. 2. 3.)">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:70%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:70%;">
                         1. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         2. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         3. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
 
                 <div class="number-swatch"
                     onmousedown="event.preventDefault(); applyNumberStyle('custom-paren-decimal')"
                     title="Parantezli Sayı (1) 2) 3))">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:70%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:70%;">
                         1) <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         2) <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         3) <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('upper-roman')"
                     title="Büyük Roma (I. II. III.)">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:80%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:80%;">
                         I. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         II. <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         III. <span
-                            style="display:inline-block; width:12px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:12px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('upper-alpha')"
                     title="Büyük Harf (A. B. C.)">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:70%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:70%;">
                         A. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         B. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         C. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('custom-paren-alpha')"
                     title="Parantezli Küçük Harf (a) b) c))">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:75%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:75%;">
                         a) <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         b) <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         c) <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('lower-alpha')"
                     title="Küçük Harf (a. b. c.)">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:70%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:70%;">
                         a. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         b. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         c. <span
-                            style="display:inline-block; width:16px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:16px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
 
                 <div class="number-swatch" onmousedown="event.preventDefault(); applyNumberStyle('lower-roman')"
                     title="Küçük Roma (i. ii. iii.)">
-                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:#eaeaea; width:70%;">
+                    <div style="font-size:0.7rem; line-height:1.4; text-align:left; color:var(--text-main); width:70%;">
                         i. <span
-                            style="display:inline-block; width:14px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:14px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         ii. <span
-                            style="display:inline-block; width:12px; height:1px; background:#71717a; margin-bottom: 2px;"></span><br>
+                            style="display:inline-block; width:12px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span><br>
                         iii. <span
-                            style="display:inline-block; width:10px; height:1px; background:#71717a; margin-bottom: 2px;"></span>
+                            style="display:inline-block; width:10px; height:2px; background:var(--text-muted); margin-bottom: 2px;"></span>
                     </div>
                 </div>
             </div>
